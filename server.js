@@ -17,6 +17,8 @@ app.use(express.urlencoded({extended:false}))
 
 //routes management
 app.use('/api/students', require('./routes/studentRoute'))
+app.use('/api/admin', require('./routes/adminRoute'))
+
 app.listen(PORT, () => {
     console.log(`our server is running port ${PORT}`);
 })
