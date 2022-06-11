@@ -37,7 +37,7 @@ if(!name || !email || !username || !password ){
         message: "All Fields Required"
     })
 }else{
- const data = await Admin.create({
+ await Admin.create({
      ...req.body,
      password: hash
  })
@@ -80,11 +80,24 @@ const delteAdminData = async (req, res) => {
     }
 };
 
+//Admin profile login
+
+const profileLogin = (req,res) => {
+res.json(req.user)
+}
+//Admin home login
+
+const homeLogin = (req, res) => {
+    res.json(req.user)
+}
+
 
 module.exports = {
     getAllAdminData,
     getSingleAdminData,
     createAdminData,
     updatedAdminData,
-    delteAdminData
+    delteAdminData,
+    profileLogin,
+    homeLogin
 }

@@ -1,5 +1,6 @@
 const Admin = require('../models/adminModel')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken') 
 
 const adminLogin = async (req, res)=>{
     const {email, password} = req.body
@@ -11,8 +12,20 @@ const adminLogin = async (req, res)=>{
         })
     }else{
         if(await (bcrypt.compare(password, admin_data.password))) {
+              const { name, email, username, id }= admin_data 
+            
+              const token = jwt.sign({id:id}, process.env.TOKEN_SECRET,{
+                  expiresIn:'1d'
+              })
+
+          
              res.status(200).json({
-                 message: 'Admin Login Successfull'
+                 name:name,
+                 email:email,
+                 username:username,
+                 id:id,
+                 token: token
+
              })
 
         } else {
