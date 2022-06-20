@@ -1,14 +1,15 @@
 const bcrypt = require('bcryptjs')
 const Admin = require('../models/adminModel')
+const asyncHandler = require('express-async-handler')
 
 // Get all admin data 
 
-const getAllAdminData = async (req, res) =>{
+const getAllAdminData = asyncHandler( async (req, res) => {
  const data = await Admin.find()   
 res.status(200).json(data)
-};
+});
 // Get single admin data 
-const getSingleAdminData = async (req, res) => {
+const getSingleAdminData = asyncHandler( async (req, res) => {
 
     const id = req.params.id
     const singleId = await Admin.findById(id)
@@ -24,9 +25,9 @@ if(singleId){
    
 
 
-};
+});
 // create admin data 
-const createAdminData = async (req, res) => {
+const createAdminData = asyncHandler( async (req, res) => {
  const {name, email, username, password, location, skill } = req.body
 
  const salt = await bcrypt.genSalt(10)
@@ -47,9 +48,9 @@ if(!name || !email || !username || !password ){
 
 }
    
-};
+});
 // update admin data 
-const updatedAdminData = async (req, res) => {
+const updatedAdminData = asyncHandler (async(req, res) => {
 
     const id = req.params.id
     const singleId = await Admin.findById(id)
@@ -63,9 +64,9 @@ const updatedAdminData = async (req, res) => {
     }
 
 
-};
+});
 // Get single admin data 
-const delteAdminData = async (req, res) => {
+const delteAdminData = asyncHandler( async(req, res) => {
      const id = req.params.id
      const singleId = await Admin.findById(id)
     if(singleId){
@@ -78,7 +79,7 @@ const delteAdminData = async (req, res) => {
             message: "Admin Data Not Found"
         })
     }
-};
+});
 
 //Admin profile login
 

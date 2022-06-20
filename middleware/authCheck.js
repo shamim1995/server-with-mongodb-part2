@@ -15,9 +15,7 @@ if (req.headers.authorization){
         //get login user id 
 
        req.user = await Admin.findById(id);
-        
-
-
+      
         next()
     }catch(error){
         console.log(error);

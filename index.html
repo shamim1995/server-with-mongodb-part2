@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <script src="https://kit.fontawesome.com/9bfa20ad65.js" crossorigin="anonymous"></script>
+    <title>File Upload</title>
+</head>
+<body>
+    
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col">
+                <div class="card w-50">
+                    <div class="card-header">
+                        <h3>File Upload</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="http://localhost:5050/upload" method="POST" enctype="multipart/form-data">
+                            <div class="my-3">
+                                <h5 class="my-3">Media File Upload</h5>
+                                <label for="upload_image">
+                                    <img style=" width: 100px; height: 100px; cursor: pointer;"
+                                        src="https://tse2.mm.bing.net/th?id=OIP.1MSlAcU9K8Y-qSYLHh2kUwHaFt&pid=Api&P=0&w=201&h=155"
+                                        alt="">
+                                    <input type="file" style="display: none;" id="upload_image" name="photo" multiple>
+                                </label>
+                            </div>
+
+                            <div class="my-3">
+                                <h5 class="my-3">PDF File Upload</h5>
+                                <label for="upload_image2">
+                                    <img style=" width: 100px; height: 100px; cursor: pointer;" src="https://www.pmoadvisory.com/wp-content/uploads/2019/03/pdf-logo-300x300.png"
+                                        alt="">
+                                    <input type="file" style="display: none;" id="upload_image2" name="photo2" multiple>
+                                </label>
+                            </div>
+                            <br>
+                            <br>
+                            <button type="submit" class="btn btn-primary w-25">Upload</button>
+                              
+                        </form>
+
+                      
+                    </div>
+                    <div id="preview">
+                          
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<style>
+    .card {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .overyly{
+        position: relative;
+    }
+    .overyly img{
+        width: 150px;
+        height: 150px;
+        cursor: pointer;
+        margin-bottom: 3px;
+        
+    }
+    .overyly i{
+    position: absolute;
+    left: 10px;
+    top:-50px;
+    cursor: pointer;
+    color: crimson;
+    opacity:0;
+    }
+
+    .overyly:hover i{
+        opacity: 1;
+    }
+    
+
+</style>
+    <script>
+
+        const upload_image = document.getElementById('upload_image')
+        const preview = document.getElementById('preview')
+        
+
+        upload_image.onchange = (e)=>{
+
+            
+            const {type, size} =e.target.files[0]
+            let image= e.target.files;
+             
+             
+
+            let prev=''
+            if(type == 'image/jpeg' || type == "image/webp" || type == 'image/png' || type == 'image/svg'){
+                
+                for(image of image){
+                   
+                    let urlimg = URL.createObjectURL(image);
+                    prev +=`<span class="overyly"><img src="${urlimg}"
+                    alt=""><i onclick="deleteImg()" class="fa fa-trash"></i> </span>`
+                }
+                preview.innerHTML=prev
+
+            }else{
+                alert("invalid format")
+            }
+            
+           
+           
+        }
+
+         const deleteImg = ()=>{
+           
+            
+          
+         }
+        
+
+
+    </script>
+    
+</body>
+</html>

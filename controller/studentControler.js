@@ -1,7 +1,7 @@
 const Student = require('../models/studentModel')
-
+const asyncHandler = require('express-async-handler')
 //Get All DAta
-const getAllDAta = async (req,res) =>{
+const getAllDAta = asyncHandler (async(req, res) => {
 
  const data = await Student.find()
     if(data==''){
@@ -12,9 +12,9 @@ const getAllDAta = async (req,res) =>{
         res.status(200).json(data)
     }
     
-};
+});
 //Get Single DAta
-const getSingleDAta =async  (req, res) => {
+const getSingleDAta = asyncHandler (async(req, res) => {
      const id = req.params.id
      
     const hasId = await Student.findById(id)
@@ -29,9 +29,9 @@ const getSingleDAta =async  (req, res) => {
     }
    
    
-};
+});
 // Create DAta
-const getCreateDAta = async (req,res) => {
+const getCreateDAta = asyncHandler (async(req, res) => {
     const {name,age, skill} = req.body
     
    const data= await Student.create({
@@ -40,9 +40,9 @@ const getCreateDAta = async (req,res) => {
     res.status(200).json({
         message: "Data Created"
     })
-};
+});
 //Updated DAta
-const getUpdatedDAta = async (req, res) => {
+const getUpdatedDAta = asyncHandler( async (req, res) => {
 
 const id = req.params.id
 
@@ -59,12 +59,12 @@ res.status(200).json({
     message:'Data Updated'
 })
 }
-};
+});
 //Delete DAta
-const getDeleteDAta = async () => {
+const getDeleteDAta = asyncHandler( async () => {
 const id = req.params.id
     await Student.findByIdAndDelete(id)
-};
+});
 
 
 module.exports = {

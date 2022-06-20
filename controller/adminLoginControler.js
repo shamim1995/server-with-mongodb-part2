@@ -1,8 +1,9 @@
 const Admin = require('../models/adminModel')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken') 
+const asyncHandler = require('express-async-handler')
 
-const adminLogin = async (req, res)=>{
+const adminLogin = asyncHandler( async (req, res) => {
     const {email, password} = req.body
     const admin_data = await Admin.findOne({email})
 
@@ -36,7 +37,7 @@ const adminLogin = async (req, res)=>{
         
     }
 
-}
+})
 
 
 module.exports = adminLogin
